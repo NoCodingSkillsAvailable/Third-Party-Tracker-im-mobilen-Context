@@ -14,21 +14,41 @@ Im dritten Schritt soll nochmal eine Ebene tiefer gegangen werden und mit der fr
 
 ## Vorbereitung: Auswahl und Root eines Android Gerätes
 
+Der Versuch wurde mit einem **Samsung Galaxy S4 (Android-Betriebssystem)** durchgeführt. Dementsprechend basieren die Erläuterungen zum Versuchsaufbau auf eben diesem Geräte-Typ und können für andere Betriebssysteme oder Hersteller abweichen.
 
+Um die Versuchsdurchführung zu vereinfachen, wurde dieses Gerät zuächst gerootet und eine modifizierte Android-Version installiert. So konnten Anwendungen entfernt werden, die standardmäßig installiert waren und im Hintergrund Datenverkehr verursacht hätten, welcher die Auswertungen verfälscht hätte.
+
+Der **Root-Vorgang** wird auf Basis folgender Anleitung durchgeführt: https://www.giga.de/smartphones/samsung-galaxy-s4/tipps/samsung-galaxy-s4-root-anleitung/
+
+Bezogen auf die Anleitung ist nur eine Anmerkung notwendig. Und zwar ist im File von CF-Auto-Root die Software Odin inzwischen in der Version 3.10 enthalten, wodurch sich die Oberfläche verändert hat. Das Feld "PDA" heißt jetzt "AP". Und auch die "Options" finden sich in einem eigenen Reiter, hier muss aber nichts verändert werden. Es muss rein die jeweilige .tar- bzw. .md5-Datei ins Feld "AP" hinzugefügt werden. Folgender Screenshot zeigt die im Vergleich zur verlinkten Anleitung veränderte Oberfläche von Odin:
+
+<img src="https://user-images.githubusercontent.com/99191546/152818052-055173dc-dc0e-4255-b324-150ae01934e5.png" width="800">
+
+
+Nach erfolgtem Root und Installation von TWRP als Custom-Recovery ist noch die Installation des modifizierten Android-Betriebssystems notwendig. Hier wurde LineageOS ausgewählt, da dieses weit verbreitet und damit eine umfangreiche Dokumentation vorhanden ist. 
+
+Die **Installation von LineageOS** erfolgt auf Basis folgender Anleitung: https://wiki.lineageos.org/devices/jfltexx/install#installing-lineageos-from-recovery
+
+- Der unter Punkt 1 angesprochene Download der Google Apps ist notwendig. Hier entsprechend der installierten LineageOS-Version die notwendigen Google Apps auf der verlinkten Website auswählen und gemeinsam gemeinsam mit der LineageOS-Datei (beides ZIP-Dateien) auf dem Smartphone speichern.
+- Punkt 3 nennt sich beim installierten TWRP-Recovery nicht "Factory Reset", sondern "Wipe". Diesen wie voreingestellt durchführen und dann wieder zum Hauptmenü zurückkehren.
+- Die Installation von LineageOS (Punkt 5) und der Google Apps (Punkt 6) erfolgt bei TWRP-Recovery per Klick auf "Inastall". Danach müssen die jeweiligen ZIP-Dateien ausgewählt und nacheinander installiert werden.
+- Nach Abschluss kann das Smartphone wie beschrieben neu gestartet werden und die Vorbereitung ist abgeschlossen.
 
 ## 1. Schritt: Exodus Privacy
 
-Ein erster Scan der zuvor ausgewählten Apps kann mit der Website https://reports.exodus-privacy.eu.org/de/ vorgenommen werden.
+Ein erster Scan der zuvor ausgewählten Apps kann mit der **Website Exodus Privacy** (https://reports.exodus-privacy.eu.org/de/) vorgenommen werden.
+
+Hier kann über das Such-Feld direkt nach bestimmten Anwendungen gesucht werden. Falls eine Anwendung noch nicht vorhanden ist, kann die Analyse über das Feld "Eine neue Analyse durchführen" angestoßen werden.
 
 ## 2. Schritt: Installation Pi-hole
 
-Um ein Pi-hole zu installieren haben wir einen Raspberry Pi genutzt. Alternativ wäre auch ein Docker Container möglich.
+Die für die DNS-Analyse notwendige Software Pi-hole wurde für den Versuch auf einem Raspberry Pi (Zero 2 W) installiert. Alternativ wäre auch ein Docker Container möglich.
+
+Zunächst muss der Raspberry Pi mit dem Betriebssystem Pi OS eingrichtet werden. Eine Anleitung dazu und zur zusätzlichen Installation des Pi-hole via SSH ist hier zu finden: https://www.vektorkneter.de/pi-hole-auf-einem-raspberry-pi-einrichten/
 
 Eine Anleitung für die Installation von Pi-hole findet man hier: https://github.com/pi-hole/pi-hole
 
 Wichtig hierbei ist die Einbindung des Pi-hole im DHCP des Routers. Unter dem obigen Link ist dazu eine Beschreibung.
-
-Vorher muss natürlich Raspberry Pi OS installiert sein. Eine Anleitung dazu und zur zusätzlichen Installation des Pi-hole via SSH findet ihr hier: https://www.vektorkneter.de/pi-hole-auf-einem-raspberry-pi-einrichten/
 
 ## 3. Schritt: Auswertung der DNS-Anfragen des Smartphones mit Hilfe des Pi-hole
 
