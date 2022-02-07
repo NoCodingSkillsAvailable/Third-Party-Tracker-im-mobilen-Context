@@ -44,11 +44,11 @@ Hier kann über das Such-Feld direkt nach bestimmten Anwendungen gesucht werden.
 
 Die für die DNS-Analyse notwendige Software Pi-hole wurde für den Versuch auf einem Raspberry Pi (Zero 2 W) installiert. Alternativ wäre auch ein Docker Container möglich.
 
-Zunächst muss der Raspberry Pi mit dem Betriebssystem Pi OS eingrichtet werden. Eine Anleitung dazu und zur zusätzlichen Installation des Pi-hole via SSH ist hier zu finden: https://www.vektorkneter.de/pi-hole-auf-einem-raspberry-pi-einrichten/
+Zunächst muss der Raspberry Pi mit dem Betriebssystem Pi OS eingrichtet werden. Eine Anleitung hierfür und zur zusätzlichen Installation des Pi-hole via SSH ist hier zu finden: https://www.vektorkneter.de/pi-hole-auf-einem-raspberry-pi-einrichten/
 
-Eine Anleitung für die Installation von Pi-hole findet man hier: https://github.com/pi-hole/pi-hole
+Allgemeine Infos und Anleitungen für die Installation von Pi-hole findet man hier: https://github.com/pi-hole/pi-hole
 
-Wichtig hierbei ist die Einbindung des Pi-hole im DHCP des Routers. Unter dem obigen Link ist dazu eine Beschreibung.
+Wichtig hierbei ist die Einbindung des Pi-hole als Lokaler DNS-Server im DHCP des Routers. Unter dem ersten Link ist dazu eine Beschreibung.
 
 ## 3. Schritt: Auswertung der DNS-Anfragen des Smartphones mit Hilfe des Pi-hole
 
