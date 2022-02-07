@@ -1,5 +1,5 @@
-# Third-Party-Tracker-im-mobilen-Context
-Untersuchung von Third-Party Tracker im mobilen Context
+# Third-Party-Tracker im mobilen Kontext
+Untersuchung von Third-Party Tracker im mobilen Kontext
 
 Für den Start unseres Projektes steht der Versuchsaufbau in einem Dreischritt.
 
