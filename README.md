@@ -24,7 +24,7 @@ Wichtig hierbei ist die Einbindung des Pi-hole im DHCP des Routers. Unter dem ob
 Vorher muss natürlich Raspberry Pi OS installiert sein. Eine Anleitung dazu und zur zusätzlichen Installation des Pi-hole via SSH findet ihr hier: https://www.vektorkneter.de/pi-hole-auf-einem-raspberry-pi-einrichten/
 
 ## 2. Schritt Rooten eines Android Gerätes
-=
+
 In diesem Schritt muss ein Android Gerät gerootet werden, um eine Sandbox herzustellen.
 ?????????????????????????????????????????????????????
 
@@ -63,3 +63,4 @@ Wichtig hierbei ist, dass man nicht vergisst das Zertifikat auf dem Endgerät zu
 Ein Sicherheitsfeature in Android erlaubt es nicht mehr so einfach Zertifikate in Android auszutauschen. Daher müssen die APKs für die einzelnen Apps angepasst werden.
 
 ?????
+
