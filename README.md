@@ -29,11 +29,11 @@ In diesem Schritt muss ein Android Gerät gerootet werden, um eine Sandbox herzu
 ?????????????????????????????????????????????????????
 
 ## 3. Vorauswahl durch Privacy Exodus
-=
+
 Ein erster Scan der zuvor ausgewählten Apps kann mit der Website https://reports.exodus-privacy.eu.org/de/ vorgenommen werden.
 
 ## 4. Schritt Tracken der Daten auf dem Android Gerät
-=
+
 Sobald die Vorauswahl getroffen ist kann man das Samsung Gerät mit dem Netzwerk verbinden in dem das Pi-hole läuft. 
 ![leere log datei](https://user-images.githubusercontent.com/99183076/152790528-72636d28-3061-4478-a556-2a6bd364777c.PNG)
 
