@@ -72,9 +72,36 @@ Zusätzliche Befehle sind hier zu finden: https://docs.pi-hole.net/core/pihole-c
 
 ## 4. Schritt: Installation mitmproxy
 
-Eine komplette Beschreibung für die Installation von mitmproxy findet man hier https://github.com/mitmproxy/mitmproxy
+Die **Installation von mitmproxy auf einem PC** mit Windows 10 als Betriebssystem erfolgt auf Basis folgender Anleitung: https://docs.mitmproxy.org/stable/overview-installation/#windows
 
-Wichtig hierbei ist, dass man nicht vergisst das Zertifikat auf dem Endgerät zu installieren.
+Nachdem der Installer ausgeführt und die Software installiert wurde, können die einzelnen Bestandteile über die Eingabeaufforderung gestartet werden. In unserem Experimenent wurde mitmweb genutzt, welches durch Eingabe des Befehls "mitmweb" in die Eingabeaufforderung gestartet wird.
+
+Folgende Seite gibt nochmal eine Übersicht über die verschiedenen Tools und erklärt die **Konfiguration des Smartphones**, damit es mit mitmweb verbunden werden kann: https://docs.mitmproxy.org/stable/overview-getting-started/
+
+Wie beschrieben unterscheidet sich die Konfiguration des Proxy für verschiedene Smartphone-Typen. Beim hier genutzten Samsung Galaxy S4 wird unter WLAN-Einstellungen in den Details das Feld *Proxy* von "Keiner" auf "Manuell" gestellt. Danach muss als *Proxy-Hostname* die IP-Adresse des PCs angegeben werden, auf dem mitmproxy installiert wurde, und unter *Proxy-Port* muss der standardmäßige Wert "8080" angegeben werden.
+
+Wie beschrieben steht als letzetr Schritt zur Konfiguration des Smartphones die Installation der mitmproxy Certificate Authority. Bei unserem Gerät wurde das Zertifikat über *Einstellungen -> Sicherheit -> Verschlüsselung und Anmeldedaten -> Ein Zertifkat installieren -> CA-Zertifikat* installiert. Dieser Schritt kann sich aber wie bereits die Einstellung des Proxy für verschiedene Smartphone-Typen unterscheiden.
+
+Nachdem das Zertifikat erfolgreich installiert und die Proxy-Einstellungen des Smartphone wie beschrieben angepasst wurden, zeigt die mitmweb-Oberfläche erste Daten zum Netzwerkverkehr, zumindest bei Aufruf verschiedener Websites über den Browser. Werden Anwendungen installiert und bei verbundenem mitmproxy gestartet, zeigen diese meist zu Beginn direkt eine Fehlermeldung.
+
+### Problem: Certificate Pinning
+
+Hierbei handelt es sich um ein Sicherheitsfeature, das Andorid ab Version 7 eingebaut hat: https://developer.android.com/about/versions/nougat/android-7.0#default_trusted_ca
+
+Um nun trotzdem den Netzwerkverkehr der Anwendungen analysieren zu können, ist eine Anpassung der zugehörigen APK-Dateien notwendig. Folgender Kommentar beschreibt die beiden Möglichkeiten: https://github.com/mitmproxy/mitmproxy/issues/2054#issuecomment-912422392
+
+Da die auf unserem Smartphone installierte LineageOS-Version auf Android 11 basiert, ist wie beschrieben die Nutzung von **apk-mitm** notwendig: https://github.com/shroudedcode/apk-mitm
+
+Die Installation und Konfiguration erfolgt wie in der Anleitung beschrieben auf einem PC mit Windows 10. Die angegebenen Befehle werden über *Node.js command prompt* ausgeführt. Es ist wichtig, dass die APK-Dateien, die gepatched werden sollen, im selben Ordner abgelegt werden, wie in der Eingabeaufforderung angegeben. In unserem Fall war das wie im folgenden Ausschnitt zu sehen *C:\Users\Dominik*. APK-Dateien können von verschiedenen Websites heruntergeladen werden, wir haben https://apkpure.com/de/ genutzt.
+
+<img src="https://user-images.githubusercontent.com/99191546/152893211-7375ec1b-d760-4716-b57b-282096edb090.png" width= "800">
+
+Nach erfolgreichem Durchlauf befindet sich eine APK-Datei mit dem Zusatz "-patched" im selben Ordner wie die Ursprungsdatei. Diese kann nun auf die SD-Karte des Smartphones übertragen werden und direkt aus dem Datei-Explorer heraus installiert werden. 
 
 ## 5. Schritt: Auswertung des Netzwerkverkehrs des Smartphones mit Hilfe von mitmproxy
 
+Mit apk-mitm bearbeitete Dateien können nach Installation auf dem Smartphone via mitmweb analysiert werden. Hierzu wird wie in Schritt 4 bereits beschrieben mitmweb am PC über die Eingabeaufforderung gestartet. Zudem muss die Konfiguration des Proxy am Smartphone sichergestellt sein. Wird eine zu untersuchende Anwendung nun am Smartphone gestartet und enrsprechend bedient, zeigt mitmweb zugehörige HTTPS-Requests an, wie folgende Abbildung beispielhaft darstellt.
+
+<img src="https://user-images.githubusercontent.com/99191546/152895706-f36b6d96-6b1f-498c-b409-888f7d4cb9ac.png" width= "800">
+
+Bei Klick auf die entsprechende Zeile des jeweiligen HTTPS-Requests werden dessen Inhalt angezeigt.
