@@ -1,5 +1,5 @@
 # Third-Party-Tracker im mobilen Kontext
-Im Folgenden wird das Vorgehen im Rahmen des Praxisseminars mit dem Titel **"Empirische Untersuchung von Third-Party-Tracker im mobilen Ökosystem"** ausführlich erläutert.
+Im Folgenden wird das praktische Vorgehen im Rahmen des Seminars mit dem Titel **"Empirische Untersuchung von Third-Party-Tracker im mobilen Ökosystem"** ausführlich erläutert.
 
 Das Vorgehen basiert grundlegend auf der Nutzung drei verschiedener Tools, die verschiedene Umfänge bieten und aufeinander aufbauen.
 
@@ -23,7 +23,7 @@ Demzufolge gestaltet sich der **Aufbau dieser Anleitung** wie folgt:
 
 Der Versuch wurde mit einem **Samsung Galaxy S4 (Android-Betriebssystem)** durchgeführt. Dementsprechend basieren die Erläuterungen zum Versuchsaufbau auf eben diesem Geräte-Typ und können für andere Betriebssysteme oder Hersteller abweichen.
 
-Um die Versuchsdurchführung zu vereinfachen, wurde dieses Gerät zuächst gerootet und eine modifizierte Android-Version installiert. So konnten Anwendungen entfernt werden, die standardmäßig installiert waren und im Hintergrund Datenverkehr verursacht hätten, welcher die Auswertungen verfälscht hätte.
+Um die Versuchsdurchführung zu vereinfachen, wurde dieses Gerät zunächst gerootet und eine modifizierte Android-Version installiert. So konnten Anwendungen entfernt werden, die standardmäßig installiert waren und im Hintergrund Datenverkehr verursacht hätten, welcher die Auswertungen verfälscht hätte.
 
 Der **Root-Vorgang** wird auf Basis folgender Anleitung durchgeführt: https://www.giga.de/smartphones/samsung-galaxy-s4/tipps/samsung-galaxy-s4-root-anleitung/
 
@@ -36,7 +36,7 @@ Nach erfolgtem Root und Installation von TWRP als Custom-Recovery ist noch die I
 
 Die **Installation von LineageOS** erfolgt auf Basis folgender Anleitung: https://wiki.lineageos.org/devices/jfltexx/install#installing-lineageos-from-recovery
 
-- Der unter Punkt 1 angesprochene Download der Google Apps ist notwendig. Hier entsprechend der installierten LineageOS-Version die notwendigen Google Apps auf der verlinkten Website auswählen und gemeinsam gemeinsam mit der LineageOS-Datei (beides ZIP-Dateien) auf dem Smartphone speichern.
+- Der unter Punkt 1 angesprochene Download der Google Apps ist notwendig. Hier entsprechend der installierten LineageOS-Version die notwendigen Google Apps auf der verlinkten Website auswählen und gemeinsam mit der LineageOS-Datei (beides ZIP-Dateien) auf dem Smartphone speichern.
 - Punkt 3 nennt sich beim installierten TWRP-Recovery nicht "Factory Reset", sondern "Wipe". Diesen wie voreingestellt durchführen und dann wieder zum Hauptmenü zurückkehren.
 - Die Installation von LineageOS (Punkt 5) und der Google Apps (Punkt 6) erfolgen bei TWRP-Recovery per Klick auf "Install". Danach müssen die jeweiligen ZIP-Dateien ausgewählt und nacheinander installiert werden.
 - Nach Abschluss kann das Smartphone wie beschrieben neu gestartet werden und die Vorbereitung ist abgeschlossen.
@@ -51,7 +51,7 @@ Hier kann über das Such-Feld direkt nach bestimmten Anwendungen gesucht werden.
 
 Die für die DNS-Analyse notwendige Software **Pi-hole** wurde für den Versuch auf einem **Raspberry Pi (Zero 2 W)** installiert. Alternativ wäre auch ein Docker Container möglich.
 
-Zunächst muss der Raspberry Pi mit dem Betriebssystem Pi OS eingrichtet werden. Eine Anleitung hierfür und zur zusätzlichen Installation des Pi-hole via SSH findet sich unter folgendem Link: https://www.vektorkneter.de/pi-hole-auf-einem-raspberry-pi-einrichten/
+Zunächst muss der Raspberry Pi mit dem Betriebssystem Pi OS eingerichtet werden. Eine Anleitung hierfür und zur zusätzlichen Installation des Pi-hole via SSH findet sich unter folgendem Link: https://www.vektorkneter.de/pi-hole-auf-einem-raspberry-pi-einrichten/
 
 Wichtig ist hierbei die Einbindung des Pi-hole als *Lokaler DNS-Server* im DHCP des Routers, wie auch in der Anleitung beschrieben.
 
@@ -64,10 +64,10 @@ Nach erfolgter Installation des Raspberry Pi mit Pi-hole kann man das Samsung-Ge
 
 Durch die Einbindung in das Gesamtnetzwerk kann wie in dem obigen Bild beschrieben einfach nach der IP-Adresse des Gerätes gefiltert werden.
 
-Unter *Group Management* in der Pi-hole-Webansicht, die über der IP-Adresse des Raspberry Pi erreichbar ist, können verschiedene Adlists eingefügt werden. 
+Unter *Group Management* in der Pi-hole-Webansicht, die über der IP-Adresse des Raspberry Pi erreichbar ist, können verschiedene AdBlock-Listen eingefügt werden. 
 Eine Aufzählung der Listen kann man unter https://firebog.net/ finden.
 
-**Adlists** können wie folgt eingefügt werden:
+**AdBlock-Listen** können wie folgt eingefügt werden:
 
 <img src="https://user-images.githubusercontent.com/99183076/152791578-66160551-9405-49ca-94a7-ac9817f83660.PNG" width="800">
 
@@ -82,15 +82,15 @@ Zusätzliche Befehle sind hier zu finden: https://docs.pi-hole.net/core/pihole-c
 
 Die **Installation von mitmproxy auf einem PC** mit Windows 10 als Betriebssystem erfolgt auf Basis folgender Anleitung: https://docs.mitmproxy.org/stable/overview-installation/#windows
 
-Nachdem der Installer ausgeführt und die Software installiert wurde, können die einzelnen Bestandteile über die Eingabeaufforderung gestartet werden. In unserem Experimenent wurde **mitmweb** genutzt, welches durch Eingabe des Befehls "mitmweb" in die Eingabeaufforderung gestartet wird.
+Nachdem der Installer ausgeführt und die Software installiert wurde, können die einzelnen Bestandteile über die Eingabeaufforderung gestartet werden. In unserem Experiment wurde **mitmweb** genutzt, welches durch Eingabe des Befehls "mitmweb" in die Eingabeaufforderung gestartet wird.
 
 Folgende Seite gibt nochmal eine Übersicht über die verschiedenen Tools und erklärt die **Konfiguration des Smartphones**, damit es mit mitmweb verbunden werden kann: https://docs.mitmproxy.org/stable/overview-getting-started/
 
-Wie beschrieben unterscheidet sich die Konfiguration des Proxy für verschiedene Smartphone-Typen. Beim hier genutzten Samsung Galaxy S4 wird unter *WLAN-Einstellungen* in den Details das Feld *Proxy* von "Keiner" auf "Manuell" gestellt. Danach muss als *Proxy-Hostname* die IP-Adresse des PCs angegeben werden, auf dem mitmproxy installiert wurde, und unter *Proxy-Port* muss der standardmäßige Wert "8080" angegeben werden.
+Wie beschrieben unterscheidet sich die Konfiguration des Proxys für verschiedene Smartphone-Typen. Beim hier genutzten Samsung Galaxy S4 wird unter *WLAN-Einstellungen* in den Details das Feld *Proxy* von "Keiner" auf "Manuell" gestellt. Danach muss als *Proxy-Hostname* die IP-Adresse des PCs angegeben werden, auf dem mitmproxy installiert wurde, und unter *Proxy-Port* muss der standardmäßige Wert "8080" angegeben werden.
 
-Wie beschrieben steht als letzer Schritt zur Konfiguration des Smartphones die Installation der **mitmproxy Certificate Authority** Dies ist notwendig, um auch verschlüsselten HTTPS-Traffic analysieren zu können. Bei unserem Gerät wurde das Zertifikat über *Einstellungen -> Sicherheit -> Verschlüsselung und Anmeldedaten -> Ein Zertifkat installieren -> CA-Zertifikat* installiert. Dieser Schritt kann sich aber wie bereits die Einstellung des Proxy für verschiedene Smartphone-Typen unterscheiden.
+Als letzter Schritt zur Konfiguration des Smartphones steht wie beschrieben die Installation der **mitmproxy Certificate Authority**. Dies ist notwendig, um auch verschlüsselten HTTPS-Traffic analysieren zu können. Bei unserem Gerät wurde das Zertifikat über *Einstellungen -> Sicherheit -> Verschlüsselung und Anmeldedaten -> Ein Zertifikat installieren -> CA-Zertifikat* installiert. Dieser Schritt kann sich aber wie bereits die Einstellung des Proxys für verschiedene Smartphone-Typen unterscheiden.
 
-Nachdem das Zertifikat erfolgreich installiert und die Proxy-Einstellungen des Smartphone wie beschrieben angepasst wurden, zeigt die mitmweb-Oberfläche erste Daten zum Netzwerkverkehr, zumindest bei Aufruf verschiedener Websites über den Browser. Werden Anwendungen installiert und bei verbundenem mitmproxy gestartet, zeigen diese meist zu Beginn direkt eine Fehlermeldung.
+Nachdem das Zertifikat erfolgreich installiert und die Proxy-Einstellungen des Smartphones wie beschrieben angepasst wurden, zeigt die mitmweb-Oberfläche erste Daten zum Netzwerkverkehr, zumindest bei Aufruf verschiedener Websites über den Browser. Werden Anwendungen installiert und bei verbundenem mitmproxy gestartet, zeigen diese meist zu Beginn direkt eine Fehlermeldung.
 
 ### Problem: Certificate Pinning
 
@@ -100,7 +100,7 @@ Um nun trotzdem den Netzwerkverkehr der Anwendungen analysieren zu können, ist 
 
 Da die auf unserem Smartphone installierte LineageOS-Version auf Android 11 basiert, ist wie beschrieben die Nutzung von **apk-mitm** notwendig: https://github.com/shroudedcode/apk-mitm
 
-Die Installation und Konfiguration erfolgt wie in der Anleitung beschrieben auf einem PC mit Windows 10. Die angegebenen Befehle werden über *Node.js command prompt* ausgeführt. Es ist wichtig, dass die APK-Dateien, die gepatched werden sollen, im selben Ordner abgelegt werden, wie in der Eingabeaufforderung angegeben. In unserem Fall war das wie im folgenden Ausschnitt zu sehen *C:\Users\Dominik*. 
+Die Installation und Konfiguration erfolgten wie in der Anleitung beschrieben auf einem PC mit Windows 10. Die angegebenen Befehle werden über *Node.js command prompt* ausgeführt. Es ist wichtig, dass die APK-Dateien, die gepatched werden sollen, im selben Ordner abgelegt werden, wie in der Eingabeaufforderung angegeben. In unserem Fall war das wie im folgenden Ausschnitt zu sehen *C:\Users\Dominik*. 
 
 APK-Dateien können von verschiedenen Websites heruntergeladen werden, wir haben https://apkpure.com/de/ genutzt.
 
@@ -110,7 +110,7 @@ Nach erfolgreichem Durchlauf befindet sich eine APK-Datei mit dem Zusatz "-patch
 
 ## 5. Schritt: Auswertung des Netzwerkverkehrs des Smartphones mit Hilfe von mitmproxy
 
-Mit apk-mitm bearbeitete Dateien können nach Installation auf dem Smartphone via mitmweb analysiert werden. Hierzu wird wie in Schritt 4 bereits beschrieben mitmweb am PC über die Eingabeaufforderung gestartet. Zudem muss die korrekte Konfiguration des Proxy am Smartphone sichergestellt sein. Wird eine zu untersuchende Anwendung nun am Smartphone gestartet und enrsprechend bedient, zeigt mitmweb zugehörige **HTTPS-Requests** an, wie folgende Abbildung beispielhaft darstellt.
+Mit apk-mitm bearbeitete Dateien können nach Installation auf dem Smartphone via mitmweb analysiert werden. Hierzu wird wie in Schritt 4 bereits beschrieben mitmweb am PC über die Eingabeaufforderung gestartet. Zudem muss die korrekte Konfiguration des Proxys am Smartphone sichergestellt sein. Wird eine zu untersuchende Anwendung nun am Smartphone gestartet und entsprechend bedient, zeigt mitmweb zugehörige **HTTPS-Requests** an, wie folgende Abbildung beispielhaft darstellt.
 
 <img src="https://user-images.githubusercontent.com/99191546/152895706-f36b6d96-6b1f-498c-b409-888f7d4cb9ac.png" width= "800">
 
