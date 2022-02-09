@@ -93,7 +93,7 @@ Nachdem das Zertifikat erfolgreich installiert und die Proxy-Einstellungen des S
 
 ### Problem: Certificate Pinning
 
-Hierbei handelt es sich um ein Sicherheitsfeature, das Android ab Version 7 eingebaut hat: https://developer.android.com/about/versions/nougat/android-7.0#default_trusted_ca
+Das im vorherigen Schritt installierte CA-Zertifikat wird von den Anwendungen nicht akzeptiert. Hierbei handelt es sich um ein Sicherheitsfeature, das ab Andorid Version 7 vom Benutzer hinzugefügte Zertifikate nicht mehr akzeptiert: https://developer.android.com/about/versions/nougat/android-7.0#default_trusted_ca
 
 Um nun trotzdem den Netzwerkverkehr der Anwendungen analysieren zu können, ist eine **Anpassung der zugehörigen APK-Dateien** notwendig. Folgender Kommentar beschreibt die beiden Möglichkeiten: https://github.com/mitmproxy/mitmproxy/issues/2054#issuecomment-912422392
 
