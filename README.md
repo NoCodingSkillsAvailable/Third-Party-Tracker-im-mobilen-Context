@@ -5,19 +5,19 @@ Das Vorgehen basiert grundlegend auf der Nutzung drei verschiedener Tools, die v
 
 <img src="https://user-images.githubusercontent.com/99183076/152782345-88ba20a7-a107-48dd-8cb4-2f335f27a535.png" width="800">
 
-Im ersten Schritt soll mit Hilfe von **Exodus Privacy** (https://exodus-privacy.eu.org/en/) ein erster Überblick über mobile Apps gegeben werden.  Bei der Website handelt es sich um eine Datenschutz-Audit-Plattform für Android-Anwendungen, welche dabei helfen kann, einen Überblick über die verwendeten Tracker zu erhalten. 
+Im ersten Schritt soll mit Hilfe von **Exodus Privacy** (https://exodus-privacy.eu.org/) ein erster Überblick über mobile Apps gegeben werden.  Bei der Website handelt es sich um eine Datenschutz-Audit-Plattform für Android-Anwendungen, welche dabei helfen kann, einen Überblick über die verwendeten Tracker zu erhalten. 
 
 Im zweiten Schritt werden mit Hilfe von **Pi-hole** die DNS-Anfragen von ausgewählten Apps auf einem Android Smartphone mitgeschnitten, um zu sehen, welche Tracker wirklich in welchen Apps enthalten sind. Pi-hole ist eine freie Software, die auf einem Raspberry Pi mit der Funktion eines Tracking- und Werbeblockers läuft.
 
-Im dritten Schritt soll nochmal eine Ebene tiefer gegangen werden und mit der freien Software **mitmproxy** der komplette Netzwerkverkehr des Smartphones mitgeschnitten werden. Durch einen Man-in-the-middle Angriff auf dem Smartphone kann so jede Kontaktaufnahme des Smartphones mit dem Internet überwacht werden. Dies gibt eine finale Übersicht über die von der App verwendeten Tracker.
+Im dritten Schritt soll nochmal eine Ebene tiefer gegangen und mit der freien Software **mitmproxy** der komplette Netzwerkverkehr des Smartphones mitgeschnitten werden. Durch einen Man-in-the-middle Angriff auf dem Smartphone kann so jede Kontaktaufnahme des Smartphones mit dem Internet überwacht werden. Dies gibt eine finale Übersicht über die von der App verwendeten Tracker.
 
 Demzufolge gestaltet sich der **Aufbau dieser Anleitung** wie folgt:
 - Vorbereitung: Auswahl und Root eines Smartphones
 - 1: Exodus Privacy
 - 2: Installation Pi-hole
-- 3: Auswertung der DNS-Anfragen des Smartphones mit Hilfe des Pi-hole
+- 3: Analyse der DNS-Anfragen des Smartphones mit Hilfe von Pi-hole
 - 4: Installation mitmproxy
-- 5: Auswertung des Netzwerkverkehrs des Smartphones mit Hilfe von mitmproxy
+- 5: Analyse des Netzwerkverkehrs des Smartphones mit Hilfe von mitmproxy
 
 ## Vorbereitung: Auswahl und Root eines Smartphones
 
@@ -27,25 +27,24 @@ Um die Versuchsdurchführung zu vereinfachen, wurde dieses Gerät zunächst gero
 
 Der **Root-Vorgang** wird auf Basis folgender Anleitung durchgeführt: https://www.giga.de/smartphones/samsung-galaxy-s4/tipps/samsung-galaxy-s4-root-anleitung/
 
-Bezogen auf die Anleitung ist nur eine Anmerkung notwendig. So ist im File von CF-Auto-Root die Software Odin inzwischen in der Version 3.10 enthalten, wodurch sich die Oberfläche verändert hat. Das Feld *PDA* heißt jetzt *AP*. Und auch die *Options* finden sich nun in einem eigenen Reiter, hier muss aber nichts verändert werden. Es muss rein die jeweilige .tar- bzw. .md5-Datei ins Feld *AP* hinzugefügt werden. Folgender Screenshot zeigt die im Vergleich zur verlinkten Anleitung veränderte Oberfläche von Odin:
+Bezogen auf die Anleitung ist nur eine Anmerkung notwendig. So ist im verlinkten File von CF-Auto-Root die Software Odin inzwischen in der Version 3.10 enthalten, wodurch sich die Oberfläche verändert hat. Das Feld *PDA* heißt jetzt *AP*. Und auch die *Options* finden sich nun in einem eigenen Reiter, hier muss aber nichts verändert werden. Es muss rein die jeweilige .tar- bzw. .md5-Datei ins Feld *AP* hinzugefügt werden. Folgender Screenshot zeigt die im Vergleich zur verlinkten Anleitung veränderte Oberfläche von Odin:
 
 <img src="https://user-images.githubusercontent.com/99191546/152818052-055173dc-dc0e-4255-b324-150ae01934e5.png" width="800">
-
 
 Nach erfolgtem Root und Installation von TWRP als Custom-Recovery ist noch die Installation des modifizierten Android-Betriebssystems notwendig. Hier wurde LineageOS ausgewählt, da dieses weit verbreitet und damit eine umfangreiche Dokumentation vorhanden ist. 
 
 Die **Installation von LineageOS** erfolgt auf Basis folgender Anleitung: https://wiki.lineageos.org/devices/jfltexx/install#installing-lineageos-from-recovery
 
 - Der unter Punkt 1 angesprochene Download der Google Apps ist notwendig. Hier entsprechend der installierten LineageOS-Version die notwendigen Google Apps auf der verlinkten Website auswählen und gemeinsam mit der LineageOS-Datei (beides ZIP-Dateien) auf dem Smartphone speichern.
-- Punkt 3 nennt sich beim installierten TWRP-Recovery nicht "Factory Reset", sondern "Wipe". Diesen wie voreingestellt durchführen und dann wieder zum Hauptmenü zurückkehren.
-- Die Installation von LineageOS (Punkt 5) und der Google Apps (Punkt 6) erfolgen bei TWRP-Recovery per Klick auf "Install". Danach müssen die jeweiligen ZIP-Dateien ausgewählt und nacheinander installiert werden.
+- Punkt 3 nennt sich beim installierten TWRP-Recovery nicht *Factory Reset*, sondern *Wipe*. Diesen wie voreingestellt durchführen und dann wieder zum Hauptmenü zurückkehren.
+- Die Installation von LineageOS (Punkt 5) und der Google Apps (Punkt 6) erfolgen bei TWRP-Recovery per Klick auf *Install*. Danach müssen die jeweiligen ZIP-Dateien ausgewählt und nacheinander installiert werden.
 - Nach Abschluss kann das Smartphone wie beschrieben neu gestartet werden und die Vorbereitung ist abgeschlossen.
 
 ## 1. Schritt: Exodus Privacy
 
 Ein erster Scan der zuvor ausgewählten Apps kann mit der **Website Exodus Privacy** (https://reports.exodus-privacy.eu.org/de/) vorgenommen werden.
 
-Hier kann über das Such-Feld direkt nach bestimmten Anwendungen gesucht werden. Falls eine Anwendung noch nicht vorhanden ist, kann die Analyse über das Feld "Eine neue Analyse durchführen" angestoßen werden.
+Hier kann über das *Such-Feld* direkt nach bestimmten Anwendungen gesucht werden. Falls eine Anwendung noch nicht vorhanden ist, kann die Analyse über das Feld *Eine neue Analyse durchführen* angestoßen werden.
 
 ## 2. Schritt: Installation Pi-hole
 
@@ -55,11 +54,12 @@ Zunächst muss der Raspberry Pi mit dem Betriebssystem Pi OS eingerichtet werden
 
 Wichtig ist hierbei die Einbindung des Pi-hole als *Lokaler DNS-Server* im DHCP des Routers, wie auch in der Anleitung beschrieben.
 
-Allgemeine Infos und Anleitungen für die Installation von Pi-hole findet man hier: https://github.com/pi-hole/pi-hole
+Allgemeine Infos und Anleitungen für die Installation von Pi-hole sind auf folgender Website zu finden: https://github.com/pi-hole/pi-hole
 
-## 3. Schritt: Auswertung der DNS-Anfragen des Smartphones mit Hilfe des Pi-hole
+## 3. Schritt: Analyse der DNS-Anfragen des Smartphones mit Hilfe von Pi-hole
 
-Nach erfolgter Installation des Raspberry Pi mit Pi-hole kann man das Samsung-Gerät mit dem Netzwerk verbinden, in dem das Pi-hole läuft. 
+Nach erfolgter Installation des Raspberry Pi mit Pi-hole kann man das Samsung-Gerät mit dem Netzwerk verbinden, in dem das Pi-hole läuft.
+
 <img src="https://user-images.githubusercontent.com/99183076/152790528-72636d28-3061-4478-a556-2a6bd364777c.PNG" width="800">
 
 Durch die Einbindung in das Gesamtnetzwerk kann wie in dem obigen Bild beschrieben einfach nach der IP-Adresse des Gerätes gefiltert werden.
@@ -71,10 +71,9 @@ Eine Aufzählung der Listen kann man unter https://firebog.net/ finden.
 
 <img src="https://user-images.githubusercontent.com/99183076/152791578-66160551-9405-49ca-94a7-ac9817f83660.PNG" width="800">
 
-
 Anschließend sollten erste DNS-Anfragen im ***Query Log*** ersichtlich sein. 
 
-Logfiles können mit diesem Befehl entfernt werden **"-pihole flush"**
+Logfiles können mit diesem Befehl entfernt werden: **"-pihole flush"**
 
 Zusätzliche Befehle sind hier zu finden: https://docs.pi-hole.net/core/pihole-command/ 
 
@@ -84,7 +83,7 @@ Die **Installation von mitmproxy auf einem PC** mit Windows 10 als Betriebssyste
 
 Nachdem der Installer ausgeführt und die Software installiert wurde, können die einzelnen Bestandteile über die Eingabeaufforderung gestartet werden. In unserem Experiment wurde **mitmweb** genutzt, welches durch Eingabe des Befehls "mitmweb" in die Eingabeaufforderung gestartet wird.
 
-Folgende Seite gibt nochmal eine Übersicht über die verschiedenen Tools und erklärt die **Konfiguration des Smartphones**, damit es mit mitmweb verbunden werden kann: https://docs.mitmproxy.org/stable/overview-getting-started/
+Folgende Seite gibt nochmal eine Übersicht über die verschiedenen Tools und erklärt die **Konfiguration des Smartphones**, damit dieses mit mitmweb verbunden werden kann: https://docs.mitmproxy.org/stable/overview-getting-started/
 
 Wie beschrieben unterscheidet sich die Konfiguration des Proxys für verschiedene Smartphone-Typen. Beim hier genutzten Samsung Galaxy S4 wird unter *WLAN-Einstellungen* in den Details das Feld *Proxy* von "Keiner" auf "Manuell" gestellt. Danach muss als *Proxy-Hostname* die IP-Adresse des PCs angegeben werden, auf dem mitmproxy installiert wurde, und unter *Proxy-Port* muss der standardmäßige Wert "8080" angegeben werden.
 
@@ -100,7 +99,7 @@ Um nun trotzdem den Netzwerkverkehr der Anwendungen analysieren zu können, ist 
 
 Da die auf unserem Smartphone installierte LineageOS-Version auf Android 11 basiert, ist wie beschrieben die Nutzung von **apk-mitm** notwendig: https://github.com/shroudedcode/apk-mitm
 
-Die Installation und Konfiguration erfolgten wie in der Anleitung beschrieben auf einem PC mit Windows 10. Die angegebenen Befehle werden über *Node.js command prompt* ausgeführt. Es ist wichtig, dass die APK-Dateien, die gepatched werden sollen, im selben Ordner abgelegt werden, wie in der Eingabeaufforderung angegeben. In unserem Fall war das wie im folgenden Ausschnitt zu sehen *C:\Users\Dominik*. 
+Die Installation und Konfiguration erfolgen wie in der Anleitung beschrieben auf einem PC mit Windows 10. Die angegebenen Befehle werden über *Node.js command prompt* ausgeführt. Es ist wichtig, dass die APK-Dateien, die gepatched werden sollen, im selben Ordner abgelegt werden, wie in der Eingabeaufforderung angegeben. In unserem Fall war das wie im folgenden Ausschnitt zu sehen *C:\Users\Dominik*. 
 
 APK-Dateien können von verschiedenen Websites heruntergeladen werden, wir haben https://apkpure.com/de/ genutzt.
 
@@ -108,7 +107,7 @@ APK-Dateien können von verschiedenen Websites heruntergeladen werden, wir haben
 
 Nach erfolgreichem Durchlauf befindet sich eine APK-Datei mit dem Zusatz "-patched" im selben Ordner wie die Ursprungsdatei. Diese kann nun auf die SD-Karte des Smartphones übertragen werden und direkt aus dem Datei-Explorer heraus installiert werden. 
 
-## 5. Schritt: Auswertung des Netzwerkverkehrs des Smartphones mit Hilfe von mitmproxy
+## 5. Schritt: Analyse des Netzwerkverkehrs des Smartphones mit Hilfe von mitmproxy
 
 Mit apk-mitm bearbeitete Dateien können nach Installation auf dem Smartphone via mitmweb analysiert werden. Hierzu wird wie in Schritt 4 bereits beschrieben mitmweb am PC über die Eingabeaufforderung gestartet. Zudem muss die korrekte Konfiguration des Proxys am Smartphone sichergestellt sein. Wird eine zu untersuchende Anwendung nun am Smartphone gestartet und entsprechend bedient, zeigt mitmweb zugehörige **HTTPS-Requests** an, wie folgende Abbildung beispielhaft darstellt.
 
