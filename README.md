@@ -89,7 +89,7 @@ Wie beschrieben unterscheidet sich die Konfiguration des Proxys für verschieden
 
 Als letzter Schritt zur Konfiguration des Smartphones steht wie beschrieben die Installation der **mitmproxy Certificate Authority**. Dies ist notwendig, um auch verschlüsselten HTTPS-Traffic analysieren zu können. Bei unserem Gerät wurde das Zertifikat über *Einstellungen -> Sicherheit -> Verschlüsselung und Anmeldedaten -> Ein Zertifikat installieren -> CA-Zertifikat* installiert. Dieser Schritt kann sich aber wie bereits die Einstellung des Proxys für verschiedene Smartphone-Typen unterscheiden.
 
-Nachdem das Zertifikat erfolgreich installiert und die Proxy-Einstellungen des Smartphones wie beschrieben angepasst wurden, zeigt die mitmweb-Oberfläche erste Daten zum Netzwerkverkehr, zumindest bei Aufruf verschiedener Websites über den Browser. Werden Anwendungen installiert und bei verbundenem mitmproxy gestartet, zeigen diese meist zu Beginn direkt eine Fehlermeldung.
+Nachdem das Zertifikat erfolgreich installiert und die Proxy-Einstellungen des Smartphones wie beschrieben angepasst wurden, zeigt die mitmweb-Oberfläche erste Daten zum Netzwerkverkehr, zumindest bei Aufruf verschiedener Websites über den Browser. Werden Anwendungen installiert und bei verbundenem mitmproxy gestartet, zeigen diese jedoch meist direkt eine Fehlermeldung.
 
 ### Problem: Certificate Pinning
 
