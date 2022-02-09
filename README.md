@@ -1,7 +1,7 @@
 # Third-Party-Tracker im mobilen Kontext
 Im Folgenden wird das Vorgehen im Rahmen des Praxisseminars mit dem Titel **"Empirische Untersuchung von Third-Party-Tracker im mobilen Ökosystem"** ausführlich erläutert.
 
-Das Vorgehen basiert grundlegened auf der Nutzung drei verschiedener Tools, die verschiedene Umfänge bieten und aufeinander aufbauen.
+Das Vorgehen basiert grundlegend auf der Nutzung drei verschiedener Tools, die verschiedene Umfänge bieten und aufeinander aufbauen.
 
 <img src="https://user-images.githubusercontent.com/99183076/152782345-88ba20a7-a107-48dd-8cb4-2f335f27a535.png" width="800">
 
@@ -38,7 +38,7 @@ Die **Installation von LineageOS** erfolgt auf Basis folgender Anleitung: https:
 
 - Der unter Punkt 1 angesprochene Download der Google Apps ist notwendig. Hier entsprechend der installierten LineageOS-Version die notwendigen Google Apps auf der verlinkten Website auswählen und gemeinsam gemeinsam mit der LineageOS-Datei (beides ZIP-Dateien) auf dem Smartphone speichern.
 - Punkt 3 nennt sich beim installierten TWRP-Recovery nicht "Factory Reset", sondern "Wipe". Diesen wie voreingestellt durchführen und dann wieder zum Hauptmenü zurückkehren.
-- Die Installation von LineageOS (Punkt 5) und der Google Apps (Punkt 6) erfolgen bei TWRP-Recovery per Klick auf "Inastall". Danach müssen die jeweiligen ZIP-Dateien ausgewählt und nacheinander installiert werden.
+- Die Installation von LineageOS (Punkt 5) und der Google Apps (Punkt 6) erfolgen bei TWRP-Recovery per Klick auf "Install". Danach müssen die jeweiligen ZIP-Dateien ausgewählt und nacheinander installiert werden.
 - Nach Abschluss kann das Smartphone wie beschrieben neu gestartet werden und die Vorbereitung ist abgeschlossen.
 
 ## 1. Schritt: Exodus Privacy
@@ -64,12 +64,13 @@ Nach erfolgter Installation des Raspberry Pi mit Pi-hole kann man das Samsung-Ge
 
 Durch die Einbindung in das Gesamtnetzwerk kann wie in dem obigen Bild beschrieben einfach nach der IP-Adresse des Gerätes gefiltert werden.
 
+Unter *Group Management* in der Pi-hole-Webansicht, die über der IP-Adresse des Raspberry Pi erreichbar ist, können verschiedene Adlists eingefügt werden. 
+Eine Aufzählung der Listen kann man unter https://firebog.net/ finden.
+
 **Adlists** können wie folgt eingefügt werden:
 
 <img src="https://user-images.githubusercontent.com/99183076/152791578-66160551-9405-49ca-94a7-ac9817f83660.PNG" width="800">
 
-Unter *Group Management* in der Pi-hole-Webansicht, die über der IP-Adresse des Raspberry Pi erreichbar ist, können verschiedene Adlists eingefügt werden. 
-Eine Aufzählung der Listen kann man unter https://firebog.net/ finden.
 
 Anschließend sollten erste DNS-Anfragen im ***Query Log*** ersichtlich sein. 
 
@@ -87,19 +88,21 @@ Folgende Seite gibt nochmal eine Übersicht über die verschiedenen Tools und er
 
 Wie beschrieben unterscheidet sich die Konfiguration des Proxy für verschiedene Smartphone-Typen. Beim hier genutzten Samsung Galaxy S4 wird unter *WLAN-Einstellungen* in den Details das Feld *Proxy* von "Keiner" auf "Manuell" gestellt. Danach muss als *Proxy-Hostname* die IP-Adresse des PCs angegeben werden, auf dem mitmproxy installiert wurde, und unter *Proxy-Port* muss der standardmäßige Wert "8080" angegeben werden.
 
-Wie beschrieben steht als letzetr Schritt zur Konfiguration des Smartphones die Installation der **mitmproxy Certificate Authority** Dies ist notwendig, um auch verschlüsselten HTTPS-Traffic analysieren zu können. Bei unserem Gerät wurde das Zertifikat über *Einstellungen -> Sicherheit -> Verschlüsselung und Anmeldedaten -> Ein Zertifkat installieren -> CA-Zertifikat* installiert. Dieser Schritt kann sich aber wie bereits die Einstellung des Proxy für verschiedene Smartphone-Typen unterscheiden.
+Wie beschrieben steht als letzer Schritt zur Konfiguration des Smartphones die Installation der **mitmproxy Certificate Authority** Dies ist notwendig, um auch verschlüsselten HTTPS-Traffic analysieren zu können. Bei unserem Gerät wurde das Zertifikat über *Einstellungen -> Sicherheit -> Verschlüsselung und Anmeldedaten -> Ein Zertifkat installieren -> CA-Zertifikat* installiert. Dieser Schritt kann sich aber wie bereits die Einstellung des Proxy für verschiedene Smartphone-Typen unterscheiden.
 
 Nachdem das Zertifikat erfolgreich installiert und die Proxy-Einstellungen des Smartphone wie beschrieben angepasst wurden, zeigt die mitmweb-Oberfläche erste Daten zum Netzwerkverkehr, zumindest bei Aufruf verschiedener Websites über den Browser. Werden Anwendungen installiert und bei verbundenem mitmproxy gestartet, zeigen diese meist zu Beginn direkt eine Fehlermeldung.
 
 ### Problem: Certificate Pinning
 
-Hierbei handelt es sich um ein Sicherheitsfeature, das Andorid ab Version 7 eingebaut hat: https://developer.android.com/about/versions/nougat/android-7.0#default_trusted_ca
+Hierbei handelt es sich um ein Sicherheitsfeature, das Android ab Version 7 eingebaut hat: https://developer.android.com/about/versions/nougat/android-7.0#default_trusted_ca
 
 Um nun trotzdem den Netzwerkverkehr der Anwendungen analysieren zu können, ist eine **Anpassung der zugehörigen APK-Dateien** notwendig. Folgender Kommentar beschreibt die beiden Möglichkeiten: https://github.com/mitmproxy/mitmproxy/issues/2054#issuecomment-912422392
 
 Da die auf unserem Smartphone installierte LineageOS-Version auf Android 11 basiert, ist wie beschrieben die Nutzung von **apk-mitm** notwendig: https://github.com/shroudedcode/apk-mitm
 
-Die Installation und Konfiguration erfolgt wie in der Anleitung beschrieben auf einem PC mit Windows 10. Die angegebenen Befehle werden über *Node.js command prompt* ausgeführt. Es ist wichtig, dass die APK-Dateien, die gepatched werden sollen, im selben Ordner abgelegt werden, wie in der Eingabeaufforderung angegeben. In unserem Fall war das wie im folgenden Ausschnitt zu sehen *C:\Users\Dominik*. APK-Dateien können von verschiedenen Websites heruntergeladen werden, wir haben https://apkpure.com/de/ genutzt.
+Die Installation und Konfiguration erfolgt wie in der Anleitung beschrieben auf einem PC mit Windows 10. Die angegebenen Befehle werden über *Node.js command prompt* ausgeführt. Es ist wichtig, dass die APK-Dateien, die gepatched werden sollen, im selben Ordner abgelegt werden, wie in der Eingabeaufforderung angegeben. In unserem Fall war das wie im folgenden Ausschnitt zu sehen *C:\Users\Dominik*. 
+
+APK-Dateien können von verschiedenen Websites heruntergeladen werden, wir haben https://apkpure.com/de/ genutzt.
 
 <img src="https://user-images.githubusercontent.com/99191546/152893211-7375ec1b-d760-4716-b57b-282096edb090.png" width= "800">
 
