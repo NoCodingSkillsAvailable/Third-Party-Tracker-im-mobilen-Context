@@ -54,7 +54,7 @@ Zunächst muss der Raspberry Pi mit dem Betriebssystem Pi OS eingerichtet werden
 
 Wichtig ist hierbei die Einbindung des Pi-hole als *Lokaler DNS-Server* im DHCP des Routers, wie auch in der Anleitung beschrieben.
 
-Allgemeine Infos und Anleitungen für die Installation von Pi-hole sind auf folgender Website zu finden: https://github.com/pi-hole/pi-hole
+Allgemeine Informationen und Anleitungen für die Installation von Pi-hole sind auf folgender Website zu finden: https://github.com/pi-hole/pi-hole
 
 ## 3. Schritt: Analyse der DNS-Anfragen des Smartphones mit Hilfe von Pi-hole
 
@@ -85,7 +85,7 @@ Nachdem der Installer ausgeführt und die Software installiert wurde, können di
 
 Folgende Seite gibt nochmal eine Übersicht über die verschiedenen Tools und erklärt die **Konfiguration des Smartphones**, damit dieses mit mitmweb verbunden werden kann: https://docs.mitmproxy.org/stable/overview-getting-started/
 
-Wie beschrieben unterscheidet sich die Konfiguration des Proxys für verschiedene Smartphone-Typen. Beim hier genutzten Samsung Galaxy S4 wird unter *WLAN-Einstellungen* in den Details das Feld *Proxy* von "Keiner" auf "Manuell" gestellt. Danach muss als *Proxy-Hostname* die IP-Adresse des PCs angegeben werden, auf dem mitmproxy installiert wurde, und unter *Proxy-Port* muss der standardmäßige Wert "8080" angegeben werden.
+Wie beschrieben, unterscheidet sich die Konfiguration des Proxys für verschiedene Smartphone-Typen. Beim hier genutzten Samsung Galaxy S4 wird unter *WLAN-Einstellungen* in den Details das Feld *Proxy* von "Keiner" auf "Manuell" gestellt. Danach muss als *Proxy-Hostname* die IP-Adresse des PCs angegeben werden, auf dem mitmproxy installiert wurde, und unter *Proxy-Port* muss der standardmäßige Wert "8080" angegeben werden.
 
 Als letzter Schritt zur Konfiguration des Smartphones steht wie beschrieben die Installation der **mitmproxy Certificate Authority**. Dies ist notwendig, um auch verschlüsselten HTTPS-Traffic analysieren zu können. Bei unserem Gerät wurde das Zertifikat über *Einstellungen -> Sicherheit -> Verschlüsselung und Anmeldedaten -> Ein Zertifikat installieren -> CA-Zertifikat* installiert. Dieser Schritt kann sich aber wie bereits die Einstellung des Proxys für verschiedene Smartphone-Typen unterscheiden.
 
@@ -93,13 +93,13 @@ Nachdem das Zertifikat erfolgreich installiert und die Proxy-Einstellungen des S
 
 ### Problem: Certificate Pinning
 
-Das im vorherigen Schritt installierte CA-Zertifikat wird von den Anwendungen nicht akzeptiert. Hierbei handelt es sich um ein Sicherheitsfeature, das ab Andorid Version 7 vom Benutzer hinzugefügte Zertifikate nicht mehr akzeptiert: https://developer.android.com/about/versions/nougat/android-7.0#default_trusted_ca
+Das im vorherigen Schritt installierte CA-Zertifikat wird von den Anwendungen nicht akzeptiert. Hierbei handelt es sich um ein Sicherheitsfeature, das ab Android Version 7 vom Benutzer hinzugefügte Zertifikate nicht mehr akzeptiert: https://developer.android.com/about/versions/nougat/android-7.0#default_trusted_ca
 
 Um nun trotzdem den Netzwerkverkehr der Anwendungen analysieren zu können, ist eine **Anpassung der zugehörigen APK-Dateien** notwendig. Folgender Kommentar beschreibt die beiden Möglichkeiten: https://github.com/mitmproxy/mitmproxy/issues/2054#issuecomment-912422392
 
 Da die auf unserem Smartphone installierte LineageOS-Version auf Android 11 basiert, ist wie beschrieben die Nutzung von **apk-mitm** notwendig: https://github.com/shroudedcode/apk-mitm
 
-Die Installation und Konfiguration erfolgen wie in der Anleitung beschrieben auf einem PC mit Windows 10. Die angegebenen Befehle werden über *Node.js command prompt* ausgeführt. Es ist wichtig, dass die APK-Dateien, die gepatched werden sollen, im selben Ordner abgelegt werden, wie in der Eingabeaufforderung angegeben. In unserem Fall war das wie im folgenden Ausschnitt zu sehen *C:\Users\Dominik*. 
+Die Installation und Konfiguration erfolgen wie in der Anleitung beschrieben auf einem PC mit Windows 10. Die angegebenen Befehle werden über *Node.js command prompt* ausgeführt. Es ist wichtig, dass die APK-Dateien, die gepatcht werden sollen, im selben Ordner abgelegt werden, wie in der Eingabeaufforderung angegeben. In unserem Fall war das wie im folgenden Ausschnitt zu sehen *C:\Users\Dominik*. 
 
 APK-Dateien können von verschiedenen Websites heruntergeladen werden, wir haben https://apkpure.com/de/ genutzt.
 
